@@ -1,8 +1,14 @@
 #!/usr/local/bin/python3
 import sys
+import time
 from threading import Timer
+from threading import Thread
 
-def timerapp():
+def timerapp(t):
+    while t > 0:
+        print(t, end='\r')
+        time.sleep(1)
+        t -= 1
     print("timer app")
 
 def main():
@@ -10,8 +16,8 @@ def main():
     secs = input("enter secs: ")
     brewTime = int(minutes)*60 + int(secs)
 
-    t = Timer(brewTime, timerapp)
-    t.start()
+    th = Thread(target=timerapp, args=(brewTime,)) 
+    th.start()
     
     """
     at the moment doesn't work with threads need to handle that
