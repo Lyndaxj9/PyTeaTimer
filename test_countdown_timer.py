@@ -64,7 +64,5 @@ class TimerTestCase(unittest.TestCase):
         self.assertEqual(self.aTimer.getTimerSecs(), int(timeElapsed))
 
 
-
-    
 if __name__ == "__main__":
     unittest.main()
