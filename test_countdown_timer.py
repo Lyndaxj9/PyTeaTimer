@@ -58,7 +58,10 @@ class TimerTestCase(unittest.TestCase):
     def test_timer_countdown(self):
         self.aTimer.setTimerSecs(20)
         start = time.time()
-        #self.aTimer.
+        self.aTimer.countdown()
+        end = time.time()
+        timeElapsed = end - start
+        self.assertEqual(self.aTimer.getTimerSecs(), int(timeElapsed))
 
 
 
