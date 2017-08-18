@@ -1,23 +1,38 @@
 #!/usr/local/bin/python3
 import time
-from threading import Thread
+import subprocess
 
 class CountdownTimer:
     def __init__(self):
         self.className = "CountdownTimer"
         #timer stored in seconds
         self.currentTimer = 0
+        self.audioFile = "Music_Box-Big_Daddy.wav"
 
     def printClassName(self):
         print(self.className)
 
     def countdown(self):
         t = self.currentTimer
+
         while( t > 0 ):
             print(self.convertToString(t), end='\r')
             time.sleep(1)
             t -= 1
         print("TEA IS READY!!!")
+        self.playsound()
+        '''
+        except KeyboardInterrupt:
+            response = input("(Q)uit | (C)ancel Timer")
+            if(response == 'Q'):
+                sys.exit(0)
+            elif(response == 'C'):
+                t = self.currentTimer
+        '''
+
+    def playsound(self):
+        return_code = subprocess.call(["afplay", self.audioFile])
+
 
     def getTimerSecs(self):
         return self.currentTimer
@@ -45,6 +60,6 @@ if __name__ == '__main__':
     ct.printClassName()
     ct.setTimerSecs(190)
     print(ct)
-    ct.setTimerSecs(10)
+    ct.setTimerSecs(5)
     print(ct)
     ct.countdown()
