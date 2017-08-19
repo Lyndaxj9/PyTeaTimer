@@ -3,22 +3,30 @@ import time
 import subprocess
 import sys
 
+
+# TODO add check for max time allowed
 class CountdownTimer:
+    """ Countdown Timer is a class that creates a timer that will countdown from any number
+    put into it from at most 99min 60sec
+    The minutes and seconds counted down are displayed and a sound emits on the completion of the timer
+    """
+
     def __init__(self):
-        self.className = "CountdownTimer"
-        #timer stored in seconds
+        """Creates a timer object with a default current time and audio file
+        currentTime is stored in seconds
+        """
         self.currentTimer = 0
         self.audioFile = "Music_Box-Big_Daddy.wav"
 
-    def printClassName(self):
-        print(self.className)
-
     def countdown(self):
+        """A method that runs for currentTimer time displaying how much time is left
+        then indicates to user when the countdown is over with text and a sound
+        """
         t = self.currentTimer
 
-        while( t > 0 ):
-            #self.playsound()
-            sys.stdout.write('\r' + self.convertToString(t))
+        while t > 0:
+            # self.play_sound()
+            sys.stdout.write('\r' + self.convert_to_string(t))
             time.sleep(1)
             t -= 1
 
@@ -33,36 +41,40 @@ class CountdownTimer:
                 t = self.currentTimer
         '''
 
-    def playsound(self):
+    # TODO take care of return_code from the subprocess call
+    def play_sound(self):
+        """Plays a sound (on Mac) using the terminal audio player and a subprocess"""
         return_code = subprocess.call(["afplay", self.audioFile])
 
-
-    def getTimerSecs(self):
+    def get_timer_secs(self):
+        """Returns the current timer in seconds (int)"""
         return self.currentTimer
 
-    def setTimerSecs(self, seconds):
+    def set_timer_secs(self, seconds):
+        """Sets currentTimer taking in a seconds format"""
         self.currentTimer = seconds
 
-    def setTimerMinSecs(self, minutes, seconds):
+    def set_timer_min_secs(self, minutes, seconds):
+        """Sets currentTimer taking in a minutes seconds format"""
         self.currentTimer = minutes * 60 + seconds
 
-    def convertToString(self, inTime = None):
-        if (inTime is None):
-            inTime = self.currentTimer
-        minutes = int(inTime / 60)
-        seconds = inTime% 60
-        timeString = '{:02d}:{:02d}'.format(minutes, seconds)
-        return timeString
+    def convert_to_string(self, in_time=None):
+        """Converts the int currentTimer that is in seconds to be displayed in min:sec format {00:00}"""
+        if in_time is None:
+            in_time = self.currentTimer
+        minutes = int(in_time / 60)
+        seconds = in_time % 60
+        time_string = '{:02d}:{:02d}'.format(minutes, seconds)
+        return time_string
 
     def __str__(self):
-        outputTime = self.convertToString()
-        return outputTime
+        output_time = self.convert_to_string()
+        return output_time
 
 if __name__ == '__main__':
     ct = CountdownTimer()
-    ct.printClassName()
-    ct.setTimerSecs(190)
+    ct.set_timer_secs(190)
     print(ct)
-    ct.setTimerSecs(5)
+    ct.set_timer_secs(5)
     print(ct)
     ct.countdown()
