@@ -16,6 +16,7 @@ class CountdownTimer:
         currentTime is stored in seconds
         """
         self.currentTimer = 0
+        self.__MAX_TIME = 6000
         self.audioFile = "sounds/Music_Box-Big_Daddy.wav"
 
     # TODO add check to make sure currentTimer != 0 before starting
@@ -50,6 +51,10 @@ class CountdownTimer:
     def get_timer_secs(self):
         """Returns the current timer in seconds (int)"""
         return self.currentTimer
+
+    def check_time_set(self, minutes, seconds):
+        # check if the numbers are integers
+        pass
 
     # TODO add function to check if set_timer_* inputs are valid
     def set_timer_secs(self, seconds):
