@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3
 import time
 import subprocess
+import sys
 
 class CountdownTimer:
     def __init__(self):
@@ -16,11 +17,13 @@ class CountdownTimer:
         t = self.currentTimer
 
         while( t > 0 ):
-            print(self.convertToString(t), end='\r')
+            #self.playsound()
+            sys.stdout.write('\r' + self.convertToString(t))
             time.sleep(1)
             t -= 1
-        print("TEA IS READY!!!")
-        self.playsound()
+
+        sys.stdout.write('\r' + "TEA IS READY!!!" + '\n')
+
         '''
         except KeyboardInterrupt:
             response = input("(Q)uit | (C)ancel Timer")

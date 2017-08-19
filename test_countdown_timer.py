@@ -8,6 +8,11 @@ from countdown_timer import CountdownTimer
 class TimerTestCase(unittest.TestCase):
     def setUp(self):
         self.aTimer = CountdownTimer()
+        self.start = time.time()
+
+    def tearDown(self):
+        t = time.time() - self.start
+        print("%s: %.3f" % (self.id(), t))
 
     def test_print_correct_name(self):
         saved_stdout = sys.stdout
@@ -56,7 +61,7 @@ class TimerTestCase(unittest.TestCase):
             sys.stdout = saved_stdout
 
     def test_timer_countdown(self):
-        self.aTimer.setTimerSecs(20)
+        self.aTimer.setTimerSecs(10)
         start = time.time()
         self.aTimer.countdown()
         end = time.time()
