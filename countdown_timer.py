@@ -58,11 +58,21 @@ class CountdownTimer:
         """Returns the current timer in seconds (int)"""
         return self.currentTimer
 
+    def __check_time_input_valid(self, minutes, seconds):
+        return minutes.isdigit() and seconds.isdigit()
+
     def __check_time_set(self, seconds):
         # check if the numbers are integers
         return seconds <= self.__MAX_TIME
 
-    # TODO add function to check if set_timer_* inputs are valid
+    def set_timer_min_secs(self, minutes, seconds):
+        """Sets currentTimer taking in a minutes seconds format"""
+        if self.__check_time_input_valid(minutes, seconds):
+            seconds_time = int(minutes) * 60 + int(seconds)
+            return self.set_timer_secs(seconds_time)
+        else:
+            return False
+
     def set_timer_secs(self, seconds):
         """Sets currentTimer taking in a seconds format"""
         if self.__check_time_set(seconds):
@@ -70,11 +80,6 @@ class CountdownTimer:
             return True
         else:
             return False
-
-    def set_timer_min_secs(self, minutes, seconds):
-        """Sets currentTimer taking in a minutes seconds format"""
-        seconds_time = minutes * 60 + seconds
-        return self.set_timer_secs(seconds_time)
 
     def convert_to_string(self, in_time=None):
         """Converts the int currentTimer that is in seconds to be displayed in min:sec format {00:00}"""
@@ -91,6 +96,8 @@ class CountdownTimer:
 
 if __name__ == '__main__':
     ct = CountdownTimer()
+    ct.set_timer_min_secs("1", "90")
+    print(ct)
     ct.set_timer_secs(190)
     print(ct)
     ct.set_timer_secs(5)

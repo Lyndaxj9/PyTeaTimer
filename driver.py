@@ -12,8 +12,10 @@ def main():
         if response == 'S':
             new_minutes = input("How many minutes?: ")
             new_seconds = input("How many seconds?: ")
-            # if check okay in the check return values as ints
-            ct.set_timer_min_secs(int(new_minutes), int(new_seconds))
+            while not(ct.set_timer_min_secs(new_minutes, new_seconds)):
+                print("Please input integer values.")
+                new_minutes = input("How many minutes?: ")
+                new_seconds = input("How many seconds?: ")
         elif response == 'B':
             ct.countdown()
         elif response == 'V':

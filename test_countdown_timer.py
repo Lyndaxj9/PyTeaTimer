@@ -24,7 +24,7 @@ class TimerTestCase(unittest.TestCase):
         self.assertEqual(self.aTimer.get_timer_secs(), 100)
 
     def test_timer_setting_min_secs_ver(self):
-        self.aTimer.set_timer_min_secs(1, 40)
+        self.aTimer.set_timer_min_secs("1", "40")
         self.assertEqual(self.aTimer.get_timer_secs(), 100)
 
     def test_timer_print_format_01(self):
@@ -40,7 +40,7 @@ class TimerTestCase(unittest.TestCase):
             sys.stdout = saved_stdout
 
     def test_timer_print_format_02(self):
-        self.aTimer.set_timer_min_secs(5, 30)
+        self.aTimer.set_timer_min_secs("5", "30")
         saved_stdout = sys.stdout
         try:
             out = io.StringIO()
@@ -60,7 +60,7 @@ class TimerTestCase(unittest.TestCase):
         self.assertEqual(self.aTimer.get_timer_secs(), int(time_elapsed))
 
     def test_check_max_time_01(self):
-        return_value = self.aTimer.set_timer_min_secs(1, 30)
+        return_value = self.aTimer.set_timer_min_secs("1", "30")
         self.assertTrue(return_value)
 
     def test_check_max_time_02(self):
@@ -69,6 +69,10 @@ class TimerTestCase(unittest.TestCase):
 
     def test_check_timer_value(self):
         return_value = self.aTimer.countdown()
+        self.assertFalse(return_value)
+
+    def test_check_set_timer_input(self):
+        return_value = self.aTimer.set_timer_min_secs("1", "3.0")
         self.assertFalse(return_value)
 
 
