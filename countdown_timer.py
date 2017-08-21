@@ -45,10 +45,14 @@ class CountdownTimer:
                 t = self.currentTimer
         '''
 
-    # TODO take care of return_code from the subprocess call
     def play_sound(self):
         """Plays a sound (on Mac) using the terminal audio player and a subprocess"""
-        return_code = subprocess.call(["afplay", self.audioFile])
+        try:
+            completed_process = subprocess.run(["afplay", self.audioFile])
+            if completed_process.returncode != 0:
+                print("Return code " + str(completed_process.returncode) + ": audio failed to open or play")
+        except subprocess.CalledProcessError as e:
+            print("Return code " + e.returncode + ": audio failed to play")
 
     def get_timer_secs(self):
         """Returns the current timer in seconds (int)"""
