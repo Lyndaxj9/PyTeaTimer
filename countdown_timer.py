@@ -18,20 +18,23 @@ class CountdownTimer:
         self.__MAX_TIME = 6000
         self.audioFile = "sounds/Music_Box-Big_Daddy.wav"
 
-    # TODO add check to make sure currentTimer != 0 before starting
     def countdown(self):
         """A method that runs for currentTimer time displaying how much time is left
         then indicates to user when the countdown is over with text and a sound
         """
-        t = self.currentTimer
+        if self.currentTimer != 0:
+            t = self.currentTimer
 
-        while t > 0:
-            sys.stdout.write('\r' + self.convert_to_string(t))
-            time.sleep(1)
-            t -= 1
+            while t > 0:
+                sys.stdout.write('\r' + self.convert_to_string(t))
+                time.sleep(1)
+                t -= 1
 
-        sys.stdout.write('\r' + "TEA IS READY!!!" + '\n')
-        # self.play_sound()
+            sys.stdout.write('\r' + "TEA IS READY!!!" + '\n')
+            # self.play_sound()
+        else:
+            print("Please set the timer.")
+            return False
 
         '''
         except KeyboardInterrupt:

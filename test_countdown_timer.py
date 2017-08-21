@@ -67,6 +67,10 @@ class TimerTestCase(unittest.TestCase):
         return_value = self.aTimer.set_timer_secs(6001)
         self.assertFalse(return_value)
 
+    def test_check_timer_value(self):
+        return_value = self.aTimer.countdown()
+        self.assertFalse(return_value)
+
 
 if __name__ == "__main__":
     unittest.main()
