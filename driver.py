@@ -6,7 +6,7 @@ def main():
     ct = CountdownTimer()
     print("Welcome to PyTea Timer")
 
-    response = 'T'
+    response = ''
     while response != 'Q':
         response = input("Would you like to? (V)iew Teas | (S)et Timer | (B)egin Timer | (Q)uit: ")
         if response == 'S':

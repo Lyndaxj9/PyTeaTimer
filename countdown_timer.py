@@ -58,11 +58,13 @@ class CountdownTimer:
         """Returns the current timer in seconds (int)"""
         return self.currentTimer
 
-    def __check_time_input_valid(self, minutes, seconds):
+    @staticmethod
+    def __check_time_input_valid(minutes, seconds):
+        """Return true if the input are valid integers"""
         return minutes.isdigit() and seconds.isdigit()
 
     def __check_time_set(self, seconds):
-        # check if the numbers are integers
+        """Return true if the time trying to be set is less than the max time allowed"""
         return seconds <= self.__MAX_TIME
 
     def set_timer_min_secs(self, minutes, seconds):
