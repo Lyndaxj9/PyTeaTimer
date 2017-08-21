@@ -4,7 +4,6 @@ import subprocess
 import sys
 
 
-# TODO add check for max time allowed
 class CountdownTimer:
     """ Countdown Timer is a class that creates a timer that will countdown from any number
     put into it from at most 99min 60sec
@@ -32,7 +31,7 @@ class CountdownTimer:
             t -= 1
 
         sys.stdout.write('\r' + "TEA IS READY!!!" + '\n')
-        self.play_sound()
+        # self.play_sound()
 
         '''
         except KeyboardInterrupt:
@@ -52,18 +51,23 @@ class CountdownTimer:
         """Returns the current timer in seconds (int)"""
         return self.currentTimer
 
-    def check_time_set(self, minutes, seconds):
+    def __check_time_set(self, seconds):
         # check if the numbers are integers
-        pass
+        return seconds <= self.__MAX_TIME
 
     # TODO add function to check if set_timer_* inputs are valid
     def set_timer_secs(self, seconds):
         """Sets currentTimer taking in a seconds format"""
-        self.currentTimer = seconds
+        if self.__check_time_set(seconds):
+            self.currentTimer = seconds
+            return True
+        else:
+            return False
 
     def set_timer_min_secs(self, minutes, seconds):
         """Sets currentTimer taking in a minutes seconds format"""
-        self.currentTimer = minutes * 60 + seconds
+        seconds_time = minutes * 60 + seconds
+        return self.set_timer_secs(seconds_time)
 
     def convert_to_string(self, in_time=None):
         """Converts the int currentTimer that is in seconds to be displayed in min:sec format {00:00}"""

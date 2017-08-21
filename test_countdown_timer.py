@@ -59,6 +59,14 @@ class TimerTestCase(unittest.TestCase):
         time_elapsed = end - start
         self.assertEqual(self.aTimer.get_timer_secs(), int(time_elapsed))
 
+    def test_check_max_time_01(self):
+        return_value = self.aTimer.set_timer_min_secs(1, 30)
+        self.assertTrue(return_value)
+
+    def test_check_max_time_02(self):
+        return_value = self.aTimer.set_timer_secs(6001)
+        self.assertFalse(return_value)
+
 
 if __name__ == "__main__":
     unittest.main()
