@@ -3,39 +3,43 @@ import sqlite3
 
 
 def create_connection(db_file):
+    """ Create a connection to the database passed and return it.
+    Return none if it could not be connected to.
+    """
     try:
-        conn = sqlite3.connect(db_file)
-        return conn
+        in_conn = sqlite3.connect(db_file)
+        return in_conn
     except sqlite3.Error as e:
         print(e)
 
     return None
 
-def create_table(conn, create_table_sql):
+
+def create_table(in_conn, create_table_sql):
+    """ Create a table in the passed database. """
     try:
-        c = conn.cursor()
+        c = in_conn.cursor()
         c.execute(create_table_sql)
     except sqlite3.Error as e:
         print(e)
 
+
+def insert_data(in_conn, insert_data_query, insert_data_list):
+    try:
+        c = in_conn.cursor()
+        c.executemany("""INSERT INTO teas('tea_name', 'tea_type', 'temperature', 'time', 'notes', 'package', 
+                            'brand', 'buy_again', 'on_hand', 'price') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", insert_data_list)
+    except sqlite3.Error as e:
+        print(e)
+
+
 if __name__ == '__main__':
     database = "tea.db"
 
-    sql_create_tea_table = """ CREATE TABLE IF NOT EXISTS teas (
-                                    id integer PRIMARY KEY NOT NULL,
-                                    tea_name character NOT NULL,
-                                    temperature DECIMAL(6,3) NOT NULL,
-                                    time text NOT NULL,
-                                    notes text,
-                                    package character,
-                                    brand character,
-                                    buy_again character,
-                                    on_hand boolean,
-                                    price DECIMAL(6,3)
-                                    ); """
-
     conn = create_connection(database)
     if conn is not None:
-        create_table(conn, sql_create_tea_table)
+        print("Hurray! created the database connection.")
     else:
         print("Error! cannot create the database connection.")
+
+    conn.close()
