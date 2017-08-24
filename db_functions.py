@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 import sqlite3
+""" A script to create/connect to a database, create tables, and insert data"""
 
 
 def create_connection(db_file):
@@ -24,11 +25,11 @@ def create_table(in_conn, create_table_sql):
         print(e)
 
 
-def insert_data(in_conn, insert_data_query, insert_data_list):
+def insert_data_many(in_conn, insert_data_query, insert_data_list):
+    """ Insert multiple rows of data using the query and list passed. """
     try:
         c = in_conn.cursor()
-        c.executemany("""INSERT INTO teas('tea_name', 'tea_type', 'temperature', 'time', 'notes', 'package', 
-                            'brand', 'buy_again', 'on_hand', 'price') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""", insert_data_list)
+        c.executemany(insert_data_query, insert_data_list)
     except sqlite3.Error as e:
         print(e)
 

@@ -1,6 +1,6 @@
 #!/usr/local/bin/python3
 from csv_reader import *
-from db_creater import *
+from db_functions import *
 
 
 if __name__ == '__main__':
@@ -27,7 +27,7 @@ if __name__ == '__main__':
     conn = create_connection(database)
     if conn is not None:
         create_table(conn, sql_create_tea_table)
-        insert_data(conn, sql_insert_tea_table, teainfo)
+        insert_data_many(conn, sql_insert_tea_table, teainfo)
         conn.commit()
     else:
         print("Error! cannot create the database connection.")
