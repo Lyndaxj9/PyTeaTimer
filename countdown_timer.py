@@ -93,6 +93,7 @@ class CountdownTimer:
         return time_string
 
     def __str__(self):
+        """ Returns a string of the timer in a min:sec format"""
         output_time = self.convert_to_string()
         return output_time
 
