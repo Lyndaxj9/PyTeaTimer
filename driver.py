@@ -27,14 +27,17 @@ def main():
             while view_response.upper() != 'B':
                 view_response = input()
                 if view_response.upper() == 'S':
-                    tea_ctrl_view.get_one_tea()
+                    tea_ctrl_view.get_all_teas_select()
+                    view_response = input()
+                    if view_response.isdigit():
+                        tea_ctrl_view.get_one_tea(view_response)
                 elif view_response.upper() == 'A':
                     tea_ctrl_view.get_all_teas()
                 elif view_response.upper() == 'B':
                     pass
                 else:
                     tea_ctrl_view.get_all_teas()
-                    print("Please enter a valid command.")
+                    tea_ctrl_view.tView.error_display(0)
         elif response.upper() == 'Q':
             print('Goodbye.')
         else:
