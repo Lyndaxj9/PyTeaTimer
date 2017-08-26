@@ -19,6 +19,14 @@ class TeasModel:
         else:
             print("No database connection exists.")
 
+    def get_one_tea(self, tea_id):
+        if self.databaseconnected:
+            sql_select_one_tea = """ SELECT * FROM teas WHERE id = ?; """
+            singletea = select_from_table_params(self.__DBCONN, sql_select_one_tea, [tea_id])
+            return singletea
+        else:
+            print("No database connection exists.")
+
 if __name__ == '__main__':
     tm = TeasModel("tea.db")
     tm.get_teas()

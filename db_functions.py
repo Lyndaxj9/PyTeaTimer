@@ -33,11 +33,23 @@ def insert_data_many(in_conn, insert_data_query, insert_data_list):
     except sqlite3.Error as e:
         print(e)
 
+
 def select_from_table(in_conn, select_query):
     """ Select rows from table using the query passed and return a list """
     try:
         c = in_conn.cursor()
         c.execute(select_query)
+
+        rows = c.fetchall()
+        return rows
+    except sqlite3.Error as e:
+        print(e)
+
+
+def select_from_table_params(in_conn, select_query, paramvars):
+    try:
+        c = in_conn.cursor()
+        c.execute(select_query, paramvars)
 
         rows = c.fetchall()
         return rows

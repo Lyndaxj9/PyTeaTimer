@@ -16,7 +16,8 @@ class TeasView:
 
         self.__error00 = "ERROR: Please enter a valid command."
         self.__error01 = "ERROR: Number entered not within range."
-        self.__errors = [self.__error00, self.__error01]
+        self.__error02 = "ERROR: Tea could not be found in database."
+        self.__errors = [self.__error00, self.__error01, self.__error02]
 
     def general_display(self):
         display = "%s\n%s\n%s" % (self.__title, self.headers, self.__prompt00)
@@ -38,4 +39,4 @@ class TeasView:
         print("%s\n%s" % (self.__title, self.headers))
         for i, row in enumerate(all_teas):
             print(self.__teasformat.format(i+1, row[1], row[2], row[3], row[4]))
-        print("%s\n%s" % (self.__seperator, self.__prompt00))
+        print(self.__seperator)
