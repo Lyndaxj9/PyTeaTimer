@@ -27,6 +27,7 @@ if __name__ == '__main__':
     conn = create_connection(database)
     if conn is not None:
         create_table(conn, sql_create_tea_table)
+        # at the moment the data from the csv will swap teaname and teatype
         insert_data_many(conn, sql_insert_tea_table, teainfo)
         conn.commit()
     else:
