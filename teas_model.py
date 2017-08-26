@@ -15,7 +15,7 @@ class TeasModel:
         if self.databaseconnected:
             sql_select_all_teas = """ SELECT id, tea_name, tea_type, temperature, time FROM teas; """
             self.allteas = select_from_table(self.__DBCONN, sql_select_all_teas)
-            print(self.allteas)
+            return self.allteas
         else:
             print("No database connection exists.")
 
