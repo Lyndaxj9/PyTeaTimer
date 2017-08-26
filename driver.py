@@ -22,8 +22,19 @@ def main():
         elif response == 'B':
             countdown.countdown()
         elif response == 'V':
-            tea_ctrl_view.tea_control_loop()
-            print('View of all available teas and that interface (TBA)')
+            tea_ctrl_view.get_all_teas()
+            view_response = ''
+            while view_response != 'B':
+                view_response = input()
+                if view_response == 'S':
+                    tea_ctrl_view.get_one_tea()
+                elif view_response == 'A':
+                    tea_ctrl_view.get_all_teas()
+                elif view_response == 'B':
+                    pass
+                else:
+                    tea_ctrl_view.get_all_teas()
+                    print("Please enter a valid command.")
         elif response == 'Q':
             print('Goodbye.')
         else:
