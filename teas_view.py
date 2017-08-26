@@ -25,6 +25,6 @@ class TeasView:
 
     def all_teas_display(self, all_teas):
         print("%s\n%s" % (self.__title, self.headers))
-        for row in all_teas:
-            print(self.__teasformat.format(row[0], row[1], row[2], row[3], row[4]))
+        for i, row in enumerate(all_teas):
+            print(self.__teasformat.format(i, row[1], row[2], row[3], row[4]))
         print("%s\n%s" % (self.__seperator, self.__prompt01))
