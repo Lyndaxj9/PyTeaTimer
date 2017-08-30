@@ -38,6 +38,7 @@ class TeasController:
                 self.tView.error_display(2)
         else:
             self.tView.error_display(1)
+            self.tView.prompt_display(0)
 
 if __name__ == '__main__':
     tC = TeasController()
