@@ -47,6 +47,7 @@ def select_from_table(in_conn, select_query):
 
 
 def select_from_table_params(in_conn, select_query, paramvars):
+    """ Select rows from table using the query and var params for (?), return a list """
     try:
         c = in_conn.cursor()
         c.execute(select_query, paramvars)
