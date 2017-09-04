@@ -14,7 +14,8 @@ class TeasView:
 
         self.__namebrandformat = "|{0:24s} ({2:^8s})|Brand: {1:13s}|"
         self.__temppkgformat = "|{0:<35s}|Packaging: {1:9s}|"
-        self.__timepriceformat = "|{0:02d}:{1:02d} {3:29s}|Price:${2:3.2f}|"
+        self.__timepriceformat = "|{0:02d}:{1:02d} {3:29s}|Price: ${2:3.2f}{4:>9}"
+        self.__timepriceformat01 = "|{0:02d}:{1:02d} {3:29s}|Price: ${2:^12s}|"
 
         self.__prompt00 = "'S' to (S)elect a tea | 'B' to go (B)ack"
         self.__prompt01 = "'A' to view (A)ll teas"
@@ -48,7 +49,10 @@ class TeasView:
         print(self.__title)
         print(self.__namebrandformat.format(in_tea[1], in_tea[7], in_tea[2]))
         print(self.__temppkgformat.format(temp, in_tea[6]))
-        print(self.__timepriceformat.format(int(timeparts[0]), int(timeparts[1]), in_tea[10], "mins"))
+        if in_tea[10] != '':
+            print(self.__timepriceformat.format(int(timeparts[0]), int(timeparts[1]), in_tea[10], "mins", "|"))
+        else:
+            print(self.__timepriceformat01.format(int(timeparts[0]), int(timeparts[1]), "-", "mins"))
         print(in_tea)
         print(self.__seperator)
         print(self.__prompt01)
