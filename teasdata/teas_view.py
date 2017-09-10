@@ -1,5 +1,5 @@
 #!/usr/local/bin/python3
-
+from math import ceil
 
 class TeasView:
     def __init__(self):
@@ -17,6 +17,7 @@ class TeasView:
         self.__temppkgformat = "|{0:<35s}|Packaging: {1:9s}|"
         self.__timepriceformat = "|{0:02d}:{1:02d} {3:29s}|Price: ${2:3.2f}{4:>9}"
         self.__timepriceformat01 = "|{0:02d}:{1:02d} {3:29s}|Price: ${2:^12s}|"
+        self.__notelinelen = 49
         self.__notesformat00 = "|Notes: {0:49s}|"
         self.__notesformat01 = "|{0:56s}|"
         self.__buyhandformat = "|Buy Again: {0:24s}|On Hand: {1:11s}|"
@@ -45,10 +46,18 @@ class TeasView:
 
     def notes_printer(self, tea_notes):
         notelines = tea_notes.split('\n')
-        print(self.__notesformat00.format(notelines[0]))
+        print(self.__notesformat00.format(notelines[0][0:self.__notelinelen]))
+        self.line_wrapper(notelines[0])
         if len(notelines) > 1:
             for i in range(1, len(notelines)):
                 print(self.__notesformat01.format(notelines[i]))
+
+    # TODO come up with better formula to split long string
+    def line_wrapper(self, note_line):
+        if len(note_line) > self.__notelinelen:
+            lines = ceil(len(note_line) / self.__notelinelen)
+            for i in range(1, lines):
+                print(self.__notesformat01.format(note_line[i*self.__notelinelen:i*self.__notelinelen+self.__notelinelen]))
 
     def one_tea_display(self, in_tea):
         """ Print information about one tea that is passed in. """
