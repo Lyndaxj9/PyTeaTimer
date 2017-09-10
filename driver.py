@@ -1,7 +1,4 @@
 #!/usr/local/bin/python3
-import inspect
-import os
-import sys
 
 """
 cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(inspect.getfile( inspect.currentframe() ))[0],"ctimer")))
@@ -9,7 +6,7 @@ cmd_subfolder = os.path.realpath(os.path.abspath(os.path.join(os.path.split(insp
      sys.path.insert(0, cmd_subfolder)
 """
 from ctimer.countdown_timer import CountdownTimer
-from teas_controller import TeasController
+from teasdata.teas_controller import TeasController
 
 
 def main():

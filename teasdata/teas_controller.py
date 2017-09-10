@@ -1,12 +1,12 @@
 #!/usr/local/bin/python3
-from teas_model import *
-from teas_view import *
+from teasdata.teas_model import *
+from teasdata.teas_view import *
 
 
 class TeasController:
     def __init__(self):
         """ Create a connection to the teas_model and teas_view. """
-        self.__tModel = TeasModel("tea.db")
+        self.__tModel = TeasModel("teasdata/tea.db")
         self.tView = TeasView()
         self.singleTea = ()
         self.manyTea = self.__tModel.get_teas()
@@ -28,7 +28,7 @@ class TeasController:
     def get_one_tea(self, in_teaselect):
         """ Attempt to retrieve and display info about a single selected tea. """
         in_teaselect = int(in_teaselect)-1
-        if 0 <= in_teaselect < len(self.manyTea):
+        if self.manyTea is not None and 0 <= in_teaselect < len(self.manyTea):
             singletea_id = self.manyTea[in_teaselect][0]
             self.singleTea = self.__tModel.get_one_tea(str(singletea_id))
             if self.singleTea is not None:
