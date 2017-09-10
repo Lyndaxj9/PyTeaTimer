@@ -1,9 +1,10 @@
 #!/usr/local/bin/python3
-import unittest
 import io
 import sys
 import time
-from countdown_timer import CountdownTimer
+import unittest
+
+from ctimer.countdown_timer import CountdownTimer
 
 
 class TimerTestCase(unittest.TestCase):
