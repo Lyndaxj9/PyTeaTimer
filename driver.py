@@ -40,7 +40,7 @@ def main():
                             elif view_response.upper() == 'A':  # Go back to viewing all teas
                                 tea_ctrl_view.get_all_teas()
                             elif view_response.upper() == 'E':
-                                print("edit tea information")
+                                tea_ctrl_view.update_one_tea()
                 elif view_response.upper() == 'B':
                     pass
                 else:

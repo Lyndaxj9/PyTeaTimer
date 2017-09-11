@@ -44,10 +44,13 @@ class TeasController:
         """ Takes the current single tea on display and sets the countdown timer for this tea. """
         teatime = self.singleTea[0][4]
         timenumbers = teatime.split(':')
-        self.tView.all_teas_display(self.manyTea)
         self.tView.one_tea_timer(self.singleTea)
 
         return timenumbers[0], timenumbers[1]
+
+    def update_one_tea(self):
+        print("edit this tea")
+        self.tView.one_tea_display(self.singleTea)
 
 if __name__ == '__main__':
     tC = TeasController()
