@@ -40,5 +40,14 @@ class TeasController:
             self.tView.error_display(1)
             self.tView.prompt_display(0)
 
+    def set_tea_timer(self):
+        """ Takes the current single tea on display and sets the countdown timer for this tea. """
+        teatime = self.singleTea[0][4]
+        timenumbers = teatime.split(':')
+        self.tView.all_teas_display(self.manyTea)
+        self.tView.one_tea_timer(self.singleTea)
+
+        return timenumbers[0], timenumbers[1]
+
 if __name__ == '__main__':
     tC = TeasController()

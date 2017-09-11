@@ -1,6 +1,7 @@
 #!/usr/local/bin/python3
 from math import ceil
 
+
 class TeasView:
     def __init__(self):
         """ Create all the text that will be needed to present tea information. """
@@ -23,7 +24,8 @@ class TeasView:
         self.__buyhandformat = "|Buy Again: {0:24s}|On Hand: {1:11s}|"
 
         self.__prompt00 = "'S' to (S)elect a tea | 'B' to go (B)ack"
-        self.__prompt01 = "'A' to view (A)ll teas"
+        self.__prompt01 = "'A' to view (A)ll teas | 'T' to set (T)imer for this tea" \
+                          "\n'E' to (E)dit tea information"
         self.__prompt02 = "Enter the number for the tea you want to view: "
         self.__prompts = [self.__prompt00, self.__prompt01, self.__prompt02]
 
@@ -56,8 +58,9 @@ class TeasView:
     def line_wrapper(self, note_line):
         if len(note_line) > self.__notelinelen:
             lines = ceil(len(note_line) / self.__notelinelen)
-            for i in range(1, lines):
-                print(self.__notesformat01.format(note_line[i*self.__notelinelen:i*self.__notelinelen+self.__notelinelen]))
+            for i in range(1, int(lines)):
+                print(self.__notesformat01.format(
+                    note_line[i*self.__notelinelen:i*self.__notelinelen+self.__notelinelen]))
 
     def one_tea_display(self, in_tea):
         """ Print information about one tea that is passed in. """
@@ -87,3 +90,7 @@ class TeasView:
             print(self.__seperator00)
         else:
             print(self.__error02)
+
+    def one_tea_timer(self, in_tea):
+        print("timer set")
+        self.one_tea_display(in_tea)
