@@ -39,6 +39,7 @@ class TeasView:
         self.__statustext = [self.__status01, self.__status00]
 
     def general_display(self):
+        """ Prints the top part of the tea viewer and general prompt"""
         display = "%s\n%s\n%s" % (self.__title, self.__headers, self.__prompt00)
         print(display)
 
@@ -51,6 +52,7 @@ class TeasView:
         print(self.__errors[in_errornum])
 
     def notes_printer(self, tea_notes):
+        """ Print within the format of the program when the text from tea_notes has newlines """
         notelines = tea_notes.split('\n')
         print(self.__notesformat00.format(notelines[0][0:self.__notelinelen]))
         self.line_wrapper(notelines[0])
@@ -60,6 +62,7 @@ class TeasView:
 
     # TODO come up with better formula to split long string
     def line_wrapper(self, note_line):
+        """ Print onto multiple lines that fit within the width of the program the text from note_lines """
         if len(note_line) > self.__notelinelen:
             lines = ceil(len(note_line) / self.__notelinelen)
             for i in range(1, int(lines)):
@@ -96,7 +99,3 @@ class TeasView:
             print(self.__seperator00)
         else:
             print(self.__error02)
-
-    def one_tea_timer(self, in_tea):
-        print("timer set")
-        self.one_tea_display(in_tea)

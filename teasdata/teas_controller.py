@@ -41,12 +41,15 @@ class TeasController:
             self.tView.prompt_display(0)
 
     def set_tea_timer(self):
-        """ Takes the current single tea on display and sets the countdown timer for this tea. """
+        """ Takes the current single tea on display and returns the min and secs so that the countdown timer
+        can be set
+        """
         teatime = self.singleTea[0][4]
         timenumbers = teatime.split(':')
 
         return timenumbers[0], timenumbers[1]
 
+    # TODO add functionality to edit tea information
     def update_one_tea(self):
         print("edit this tea")
         self.tView.one_tea_display(self.singleTea, False)
