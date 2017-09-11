@@ -31,12 +31,13 @@ def main():
                     tea_ctrl_view.get_all_teas_select()
                     view_response = input()
                     if view_response.isdigit():  # In single tea mode
-                        tea_ctrl_view.get_one_tea(view_response)
+                        selected_tea = view_response
+                        tea_ctrl_view.get_one_tea(selected_tea)
                         while view_response.upper() != 'A':
                             view_response = input()
                             if view_response.upper() == 'T':  # Set the timer to the tea's time
                                 tmin, tsec = tea_ctrl_view.set_tea_timer()
-                                countdown.set_timer_min_secs(tmin, tsec)
+                                tea_ctrl_view.get_one_tea(selected_tea, countdown.set_timer_min_secs(tmin, tsec))
                             elif view_response.upper() == 'A':  # Go back to viewing all teas
                                 tea_ctrl_view.get_all_teas()
                             elif view_response.upper() == 'E':

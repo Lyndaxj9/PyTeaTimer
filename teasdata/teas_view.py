@@ -34,6 +34,10 @@ class TeasView:
         self.__error02 = "ERROR: Tea(s) could not be found in database."
         self.__errors = [self.__error00, self.__error01, self.__error02]
 
+        self.__status00 = "Action Successful"
+        self.__status01 = "Action Unsuccessful"
+        self.__statustext = [self.__status01, self.__status00]
+
     def general_display(self):
         display = "%s\n%s\n%s" % (self.__title, self.__headers, self.__prompt00)
         print(display)
@@ -62,7 +66,7 @@ class TeasView:
                 print(self.__notesformat01.format(
                     note_line[i*self.__notelinelen:i*self.__notelinelen+self.__notelinelen]))
 
-    def one_tea_display(self, in_tea):
+    def one_tea_display(self, in_tea, status):
         """ Print information about one tea that is passed in. """
         in_tea = in_tea[0]
         temp = str(in_tea[3]) + self.__degreesign + "F"
@@ -79,6 +83,8 @@ class TeasView:
         self.notes_printer(in_tea[5])
         print(self.__buyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
+        if status != -1:
+            print(self.__statustext[status])
         print(self.__prompt01)
 
     def all_teas_display(self, all_teas):
