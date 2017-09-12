@@ -23,14 +23,14 @@ class TeasView:
         self.__notesformat01 = "|{0:56s}|"
         self.__buyhandformat = "|Buy Again: {0:24s}|On Hand: {1:11s}|"
 
-        self.__ennamebrandformat = "|(1){0:18s} (2)({2:^8s})|Brand(3): {1:10s}|"
-        self.__entemppkgformat = "|(4){0:<32s}|Packaging(5): {1:6s}|"
-        self.__entimepriceformat = "|(6){0:02d}:{1:02d} {3:26s}|Price(7): ${2:3.2f}{4:>6}"
-        self.__entimepriceformat01 = "|(6){0:02d}:{1:02d} {3:26s}|Price(7): ${2:^9s}|"
+        self.__ennamebrandformat = "|(1){0:18s} (2)({2:^8s})|(3)Brand: {1: <10.10s}|"
+        self.__entemppkgformat = "|(4){0:<32s}|(5)Packaging: {1:6s}|"
+        self.__entimepriceformat = "|(6){0:02d}:{1:02d} {3:26s}|(7)Price: ${2:3.2f}{4:>6}"
+        self.__entimepriceformat01 = "|(6){0:02d}:{1:02d} {3:26s}|(7)Price: ${2:^9s}|"
         self.__ennotelinelen = 46
-        self.__ennotesformat00 = "|Notes(8): {0:46s}|"
+        self.__ennotesformat00 = "|(8)Notes: {0:46s}|"
         self.__ennotesformat01 = "|{0:56s}|"
-        self.__enbuyhandformat = "|Buy Again(9): {0:21s}|On Hand(10): {1:8s}|"
+        self.__enbuyhandformat = "|(9)Buy Again: {0:21s}|(10)On Hand: {1:7s}|"
 
         self.__prompt00 = "'S' to (S)elect a tea | 'B' to go (B)ack"
         self.__prompt01 = "'A' to view (A)ll teas | 'T' to set (T)imer for this tea" \
@@ -63,12 +63,10 @@ class TeasView:
 
     def notes_printer(self, tea_notes):
         """ Print within the format of the program when the text from tea_notes has newlines """
-        notelines = tea_notes.split('\n')
-        print(self.__notesformat00.format(notelines[0][0:self.__notelinelen]))
-        self.line_wrapper(notelines[0])
-        if len(notelines) > 1:
-            for i in range(1, len(notelines)):
-                print(self.__notesformat01.format(notelines[i]))
+        self.line_wrapper(tea_notes[0])
+        if len(tea_notes) > 1:
+            for i in range(1, len(tea_notes)):
+                print(self.__notesformat01.format(tea_notes[i]))
 
     # TODO come up with better formula to split long string
     def line_wrapper(self, note_line):
@@ -93,7 +91,10 @@ class TeasView:
         else:
             print(self.__timepriceformat01.format(int(timeparts[0]), int(timeparts[1]), "-", "mins"))
         print(self.__seperator01)
-        self.notes_printer(in_tea[5])
+
+        notelines = in_tea[5].split('\n')
+        print(self.__notesformat00.format(notelines[0][0:self.__notelinelen]))
+        self.notes_printer(notelines)
         print(self.__buyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
         if status != -1:
@@ -113,6 +114,12 @@ class TeasView:
         else:
             print(self.__entimepriceformat01.format(int(timeparts[0]), int(timeparts[1]), "-", "mins"))
         print(self.__seperator01)
+
+        notelines = in_tea[5].split('\n')
+        print(self.__ennotesformat00.format(notelines[0][0:self.__ennotelinelen]))
+        self.notes_printer(notelines)
+        print(self.__enbuyhandformat.format(in_tea[8], in_tea[9]))
+        print(self.__seperator00)
         print(self.__prompt03)
 
     def all_teas_display(self, all_teas):
