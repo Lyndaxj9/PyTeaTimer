@@ -57,12 +57,24 @@ def select_from_table_params(in_conn, select_query, paramvars):
     except sqlite3.Error as e:
         print(e)
 
+def update_row_in_table(in_conn, update_query, paramvars):
+    try:
+        c = in_conn.cursor()
+        c.execute(update_query, paramvars)
+        in_conn.commit()
+        print("update made!")
+    except sqlite3.Error as e:
+        print(e)
+
 if __name__ == '__main__':
-    database = "tea.db"
+    database = "teasdata/tea.db"
 
     conn = create_connection(database)
     if conn is not None:
         print("Hurray! created the database connection.")
+        query = ''' UPDATE teas SET notes = ?, price = ? WHERE id = ?'''
+        tasks = ("wow this tea pretty alright!", 6.00, 4)
+        update_row_in_table(conn, query, tasks)
     else:
         print("Error! cannot create the database connection.")
 

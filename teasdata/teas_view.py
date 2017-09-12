@@ -23,11 +23,21 @@ class TeasView:
         self.__notesformat01 = "|{0:56s}|"
         self.__buyhandformat = "|Buy Again: {0:24s}|On Hand: {1:11s}|"
 
+        self.__ennamebrandformat = "|(1){0:18s} (2)({2:^8s})|Brand(3): {1:10s}|"
+        self.__entemppkgformat = "|(4){0:<32s}|Packaging(5): {1:6s}|"
+        self.__entimepriceformat = "|(6){0:02d}:{1:02d} {3:26s}|Price(7): ${2:3.2f}{4:>6}"
+        self.__entimepriceformat01 = "|(6){0:02d}:{1:02d} {3:26s}|Price(7): ${2:^9s}|"
+        self.__ennotelinelen = 46
+        self.__ennotesformat00 = "|Notes(8): {0:46s}|"
+        self.__ennotesformat01 = "|{0:56s}|"
+        self.__enbuyhandformat = "|Buy Again(9): {0:21s}|On Hand(10): {1:8s}|"
+
         self.__prompt00 = "'S' to (S)elect a tea | 'B' to go (B)ack"
         self.__prompt01 = "'A' to view (A)ll teas | 'T' to set (T)imer for this tea" \
                           "\n'E' to (E)dit tea information"
         self.__prompt02 = "Enter the number for the tea you want to view: "
-        self.__prompts = [self.__prompt00, self.__prompt01, self.__prompt02]
+        self.__prompt03 = "'S' to (S)ave the edits | 'C' to (C)ancel"
+        self.__prompts = [self.__prompt00, self.__prompt01, self.__prompt02, self.__prompt03]
 
         self.__error00 = "ERROR: Please enter a valid command."
         self.__error01 = "ERROR: Number entered not within range."
@@ -74,7 +84,7 @@ class TeasView:
         in_tea = in_tea[0]
         temp = str(in_tea[3]) + self.__degreesign + "F"
         timeparts = in_tea[4].split(':')
-        # if(in_tea[10])
+
         print(self.__title)
         print(self.__namebrandformat.format(in_tea[1], in_tea[7], in_tea[2]))
         print(self.__temppkgformat.format(temp, in_tea[6]))
@@ -89,6 +99,21 @@ class TeasView:
         if status != -1:
             print(self.__statustext[status])
         print(self.__prompt01)
+
+    def one_tea_edit_new_display(self, in_tea):
+        in_tea = in_tea[0]
+        temp = str(in_tea[3]) + self.__degreesign + "F"
+        timeparts = in_tea[4].split(':')
+
+        print(self.__title)
+        print(self.__ennamebrandformat.format(in_tea[1], in_tea[7], in_tea[2]))
+        print(self.__entemppkgformat.format(temp, in_tea[6]))
+        if in_tea[10] != '':
+            print(self.__entimepriceformat.format(int(timeparts[0]), int(timeparts[1]), in_tea[10], "mins", "|"))
+        else:
+            print(self.__entimepriceformat01.format(int(timeparts[0]), int(timeparts[1]), "-", "mins"))
+        print(self.__seperator01)
+        print(self.__prompt03)
 
     def all_teas_display(self, all_teas):
         """ Print general information about all the teas in the all_teas param list. """

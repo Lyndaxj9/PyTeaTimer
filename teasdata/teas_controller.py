@@ -52,7 +52,8 @@ class TeasController:
     # TODO add functionality to edit tea information
     def update_one_tea(self):
         print("edit this tea")
-        self.tView.one_tea_display(self.singleTea, False)
+        self.tView.one_tea_edit_new_display(self.singleTea)
+        # self.tView.one_tea_display(self.singleTea, False)
 
 if __name__ == '__main__':
     tC = TeasController()
