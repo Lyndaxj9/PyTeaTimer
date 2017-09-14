@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 from math import ceil
+import readline
 
 
 class TeasView:
@@ -38,7 +39,10 @@ class TeasView:
         self.__prompt02 = "Enter the number for the tea you want to view: "
         self.__prompt03 = "'S' to (S)ave the edits | 'C' to (C)ancel"
         self.__prompt04 = "Or enter a number to edit that information: "
-        self.__prompts = [self.__prompt00, self.__prompt01, self.__prompt02, self.__prompt03]
+        self.__prompt05 = "Make changes and press enter" \
+                          "Or clear enter 'C' to (C)ancel changes made: "
+        self.__prompts = [self.__prompt00, self.__prompt01, self.__prompt02, self.__prompt03,
+                          self.__prompt04, self.__prompt05]
 
         self.__error00 = "ERROR: Please enter a valid command."
         self.__error01 = "ERROR: Number entered not within range."
@@ -61,6 +65,19 @@ class TeasView:
     def error_display(self, in_errornum):
         """ Prints one of the errors selected by the in_errornum param. """
         print(self.__errors[in_errornum])
+
+    @staticmethod
+    def input_w_default(promptnum, prefill=''):
+        readline.set_startup_hook(lambda: readline.insert_text("comone"))
+        try:
+            """
+            value = input(self.__prompts[promptnum])
+            if value.upper() == 'C':
+                return prefill
+            """
+            return input()
+        finally:
+            readline.set_startup_hook()
 
     def notes_printer(self, tea_notes):
         """ Print within the format of the program when the text from tea_notes has newlines """
