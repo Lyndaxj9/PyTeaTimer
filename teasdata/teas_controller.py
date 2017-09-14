@@ -1,8 +1,7 @@
 #!/usr/local/bin/python3
 from teasdata.teas_model import *
 from teasdata.teas_view import *
-import gnureadline as readline
-# import readline as readline
+import readline as readline
 
 
 class TeasController:
