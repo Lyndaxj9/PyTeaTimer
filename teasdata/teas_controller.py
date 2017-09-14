@@ -9,6 +9,8 @@ class TeasController:
         self.__tModel = TeasModel("teasdata/tea.db")
         self.tView = TeasView()
         self.singleTea = ()
+        self.__teaColumns = (("tea_name", 1), ("tea_type", 2), ("brand", 7), ("temperature", 3), ("package", 6),
+                             ("time", 4), ("price", 10), ("notes", 5), ("buy_again", 8), ("on_hand", 9))
         self.manyTea = self.__tModel.get_teas()
 
     def get_all_teas(self):
@@ -50,10 +52,18 @@ class TeasController:
         return timenumbers[0], timenumbers[1]
 
     # TODO add functionality to edit tea information
-    def update_one_tea(self):
+    def edit_one_tea(self):
         print("edit this tea")
         self.tView.one_tea_edit_new_display(self.singleTea)
+        print(self.singleTea)
         # self.tView.one_tea_display(self.singleTea, False)
+
+    def data_editor(self, section_num):
+        section_num = int(section_num)
+        if 1 <= section_num <= 10:
+            aTuple = self.__teaColumns[section_num-1]
+            print(aTuple)
+            print(self.singleTea[0][aTuple[1]])
 
 if __name__ == '__main__':
     tC = TeasController()

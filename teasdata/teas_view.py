@@ -37,6 +37,7 @@ class TeasView:
                           "\n'E' to (E)dit tea information"
         self.__prompt02 = "Enter the number for the tea you want to view: "
         self.__prompt03 = "'S' to (S)ave the edits | 'C' to (C)ancel"
+        self.__prompt04 = "Or enter a number to edit that information: "
         self.__prompts = [self.__prompt00, self.__prompt01, self.__prompt02, self.__prompt03]
 
         self.__error00 = "ERROR: Please enter a valid command."
@@ -121,6 +122,7 @@ class TeasView:
         print(self.__enbuyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
         print(self.__prompt03)
+        print(self.__prompt04)
 
     def all_teas_display(self, all_teas):
         """ Print general information about all the teas in the all_teas param list. """
