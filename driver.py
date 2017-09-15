@@ -44,14 +44,16 @@ def main():
                             elif view_response.upper() == 'E':
                                 tea_ctrl_view.edit_one_tea()
                                 edit_response = 'E'
-                                while edit_response.upper() != 'S' and edit_response.upper() != 'C':
+                                while edit_response.upper() != 'S' and edit_response.upper() != 'Y':
                                     edit_response = input()
                                     if edit_response.isdigit():
                                         tea_ctrl_view.data_editor(edit_response)
+                                        tea_ctrl_view.edit_one_tea()
                                     if edit_response.upper() == 'S':
                                         print("save edits")
                                     if edit_response.upper() == 'C':
-                                        print("Are you sure you want changes made to be discarded?")
+                                        print("Are you sure you want to discard changes made? 'Y' or 'N'")
+                                        edit_response = input()
 
                 elif view_response.upper() == 'B':
                     pass

@@ -36,6 +36,7 @@ class TeasController:
             singletea_id = self.manyTea[in_teaselect][0]
             self.singleTea = self.__tModel.get_one_tea(str(singletea_id))
             if self.singleTea is not None:
+                self.__teaholder = list(self.singleTea[0])
                 self.tView.one_tea_display(self.singleTea, in_status)
             else:
                 self.get_all_teas()
@@ -55,9 +56,7 @@ class TeasController:
 
     # TODO add functionality to edit tea information
     def edit_one_tea(self):
-        print("edit this tea")
-        self.__teaholder = self.singleTea[0]
-        self.tView.one_tea_edit_new_display(self.singleTea)
+        self.tView.one_tea_edit_new_display(self.__teaholder)
         print(self.singleTea)
         # self.tView.one_tea_display(self.singleTea, False)
 
@@ -66,7 +65,7 @@ class TeasController:
         if 1 <= section_num <= 10:
             a_tuple = self.__teaColumns[section_num-1]
             newdata = self.tView.input_w_default(5, self.__teaholder[a_tuple[1]])
-            # print(self.__teaHolder[aTuple[1]])
+            self.__teaholder[a_tuple[1]] = newdata
             print(newdata)
 
     def input_w_default(self, prompt, prefill=''):

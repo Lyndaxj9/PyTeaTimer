@@ -117,7 +117,6 @@ class TeasView:
         print(self.__prompt01)
 
     def one_tea_edit_new_display(self, in_tea):
-        in_tea = in_tea[0]
         temp = str(in_tea[3]) + self.__degreesign + "F"
         timeparts = in_tea[4].split(':')
 
