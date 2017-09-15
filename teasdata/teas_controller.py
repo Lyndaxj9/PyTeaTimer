@@ -1,7 +1,7 @@
 #!/usr/local/bin/python3
 from teasdata.teas_model import *
 from teasdata.teas_view import *
-import readline as readline
+import readline
 
 
 class TeasController:
@@ -10,7 +10,7 @@ class TeasController:
         self.__tModel = TeasModel("teasdata/tea.db")
         self.tView = TeasView()
         self.singleTea = ()
-        self.__teaHolder = ()
+        self.__teaholder = ()
         self.__teaColumns = (("tea_name", 1), ("tea_type", 2), ("brand", 7), ("temperature", 3), ("package", 6),
                              ("time", 4), ("price", 10), ("notes", 5), ("buy_again", 8), ("on_hand", 9))
         self.manyTea = self.__tModel.get_teas()
@@ -56,7 +56,7 @@ class TeasController:
     # TODO add functionality to edit tea information
     def edit_one_tea(self):
         print("edit this tea")
-        self.__teaHolder = self.singleTea[0]
+        self.__teaholder = self.singleTea[0]
         self.tView.one_tea_edit_new_display(self.singleTea)
         print(self.singleTea)
         # self.tView.one_tea_display(self.singleTea, False)
@@ -65,21 +65,19 @@ class TeasController:
         section_num = int(section_num)
         if 1 <= section_num <= 10:
             a_tuple = self.__teaColumns[section_num-1]
-            readline.insert_text('something')
-            readline.redisplay()
-            newV = self.input_w_default("yo: ", self.__teaHolder[a_tuple[1]])
+            newdata = self.tView.input_w_default(5, self.__teaholder[a_tuple[1]])
             # print(self.__teaHolder[aTuple[1]])
-            print(newV)
+            print(newdata)
 
     def input_w_default(self, prompt, prefill=''):
-        def hook():
-            readline.insert_text("default text")
-            readline.redisplay()
-        readline.set_startup_hook(hook)
-        hook()
-        value = input(prompt)
-        # readline.set_startup_hook()
-        return value
+        # readline.redisplay()
+        readline.set_startup_hook(lambda: readline.insert_text(prefill))
+        try:
+            value = input(prompt)
+            return value
+        finally:
+            readline.set_startup_hook()
+
 
 
 if __name__ == '__main__':
