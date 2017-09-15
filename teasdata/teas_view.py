@@ -15,7 +15,7 @@ class TeasView:
         self.__seperator00 = "=" * 58
         self.__seperator01 = "-" * 58
 
-        self.__namebrandformat = "|{0:24s} ({2:^8s})|Brand: {1:13s}|"
+        self.__namebrandformat = "|{0:24.24s} ({2:^8s})|Brand: {1:13s}|"
         self.__temppkgformat = "|{0:<35s}|Packaging: {1:9s}|"
         self.__timepriceformat = "|{0:02d}:{1:02d} {3:29s}|Price: ${2:3.2f}{4:>9}"
         self.__timepriceformat01 = "|{0:02d}:{1:02d} {3:29s}|Price: ${2:^12s}|"
@@ -24,7 +24,7 @@ class TeasView:
         self.__notesformat01 = "|{0:56s}|"
         self.__buyhandformat = "|Buy Again: {0:24s}|On Hand: {1:11s}|"
 
-        self.__ennamebrandformat = "|(1){0:18s} (2)({2:^8s})|(3)Brand: {1: <10.10s}|"
+        self.__ennamebrandformat = "|(1){0:<18.18s} (2)({2:^8s})|(3)Brand: {1: <10.10s}|"
         self.__entemppkgformat = "|(4){0:<32s}|(5)Packaging: {1:6s}|"
         self.__entimepriceformat = "|(6){0:02d}:{1:02d} {3:26s}|(7)Price: ${2:3.2f}{4:>6}"
         self.__entimepriceformat01 = "|(6){0:02d}:{1:02d} {3:26s}|(7)Price: ${2:^9s}|"
@@ -67,7 +67,7 @@ class TeasView:
         print(self.__errors[in_errornum])
 
     def input_w_default(self, promptnum, prefill=''):
-        readline.set_startup_hook(lambda: readline.insert_text(prefill))
+        readline.set_startup_hook(lambda: readline.insert_text(str(prefill)))
         try:
             value = input(self.__prompts[promptnum])
             if value.upper() == 'C':
