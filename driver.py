@@ -54,6 +54,7 @@ def main():
                                     if edit_response.upper() == 'C':
                                         print("Are you sure you want to discard changes made? 'Y' or 'N'")
                                         edit_response = input()
+                                tea_ctrl_view.get_one_tea(selected_tea)
 
                 elif view_response.upper() == 'B':
                     pass

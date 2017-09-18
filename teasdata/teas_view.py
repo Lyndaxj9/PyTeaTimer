@@ -25,7 +25,7 @@ class TeasView:
         self.__buyhandformat = "|Buy Again: {0:24s}|On Hand: {1:11s}|"
 
         self.__ennamebrandformat = "|(1){0:<18.18s} (2)({2:^8s})|(3)Brand: {1: <10.10s}|"
-        self.__entemppkgformat = "|(4){0:<32s}|(5)Packaging: {1:6s}|"
+        self.__entemppkgformat = "|(4){0:<32s}|(5)Packaging: {1:6.6s}|"
         self.__entimepriceformat = "|(6){0:02d}:{1:02d} {3:26s}|(7)Price: ${2:3.2f}{4:>6}"
         self.__entimepriceformat01 = "|(6){0:02d}:{1:02d} {3:26s}|(7)Price: ${2:^9s}|"
         self.__ennotelinelen = 46

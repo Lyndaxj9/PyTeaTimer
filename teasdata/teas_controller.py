@@ -83,7 +83,9 @@ class TeasController:
         if self.__teaColumns[section_num-1][0] == "temperature":  # temperature
             if newdata.isdigit() and 35 <= int(newdata) <= 215:
                 validvalue = int(newdata)
-                print(True)
+        elif self.__teaColumns[section_num-1][0] == "package":
+            if newdata.lower() == "loose" or newdata.lower() == "bag" or newdata.lower() == "pyramid":
+                validvalue = newdata.capitalize()
 
         return validvalue
 
