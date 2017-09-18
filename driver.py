@@ -48,7 +48,7 @@ def main():
                                     edit_response = input()
                                     if edit_response.isdigit():
                                         tea_ctrl_view.data_editor(edit_response)
-                                        tea_ctrl_view.edit_one_tea()
+                                        tea_ctrl_view.edit_one_data()
                                     if edit_response.upper() == 'S':
                                         print("save edits")
                                     if edit_response.upper() == 'C':

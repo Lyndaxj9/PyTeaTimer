@@ -47,11 +47,12 @@ class TeasView:
         self.__error00 = "ERROR: Please enter a valid command."
         self.__error01 = "ERROR: Number entered not within range."
         self.__error02 = "ERROR: Tea(s) could not be found in database."
-        self.__errors = [self.__error00, self.__error01, self.__error02]
+        self.__error03 = "ERROR: Value entered not valid for field."
+        self.__errors = [self.__error00, self.__error01, self.__error02, self.__error03]
 
-        self.__status00 = "Action Successful"
-        self.__status01 = "Action Unsuccessful"
-        self.__statustext = [self.__status01, self.__status00]
+        self.__status01 = "Action Successful"
+        self.__status00 = "Action Unsuccessful"
+        self.__statustext = [self.__status00, self.__status01]
 
     def general_display(self):
         """ Prints the top part of the tea viewer and general prompt"""
@@ -116,7 +117,7 @@ class TeasView:
             print(self.__statustext[status])
         print(self.__prompt01)
 
-    def one_tea_edit_new_display(self, in_tea):
+    def one_tea_edit_new_display(self, in_tea, status=-1):
         temp = str(in_tea[3]) + self.__degreesign + "F"
         timeparts = in_tea[4].split(':')
 
@@ -134,6 +135,8 @@ class TeasView:
         self.notes_printer(notelines)
         print(self.__enbuyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
+        if status != -1:
+            print(self.__statustext[status])
         print(self.__prompt03)
         print(self.__prompt04)
 

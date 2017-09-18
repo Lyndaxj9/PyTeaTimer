@@ -13,6 +13,7 @@ class TeasController:
         self.__teaColumns = (("tea_name", 1), ("tea_type", 2), ("brand", 7), ("temperature", 3), ("package", 6),
                              ("time", 4), ("price", 10), ("notes", 5), ("buy_again", 8), ("on_hand", 9))
         self.manyTea = self.__tModel.get_teas()
+        self.__edited_sect = -1
 
     def get_all_teas(self):
         """ Gets all the teas as a list from model and display it via view.
@@ -59,6 +60,9 @@ class TeasController:
         # print(self.singleTea)
         # self.tView.one_tea_display(self.singleTea, False)
 
+    def edit_one_data(self):
+        self.tView.one_tea_edit_new_display(self.__teaholder, self.__edited_sect)
+
     def data_editor(self, section_num):
         """ Edit the data based on the section user chooses to modify. """
         section_num = int(section_num)
@@ -69,7 +73,9 @@ class TeasController:
             newdata = self.data_verifier(section_num, entered_data)
             if newdata is not None:
                 self.__teaholder[a_tuple[1]] = newdata
-            print(newdata)
+                self.__edited_sect = 1
+            else:
+                self.__edited_sect = 0
 
     def data_verifier(self, section_num, newdata):
         """ Check that the data entered for the section is valid. """
