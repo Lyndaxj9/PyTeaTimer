@@ -69,7 +69,7 @@ class TeasController:
         if 1 <= section_num <= 10:
             a_tuple = self.__teaColumns[section_num-1]
             print(self.__teaholder)
-            entered_data = self.tView.input_w_default(5, self.__teaholder[a_tuple[1]])
+            entered_data = self.tView.input_w_default(5, self.__teaholder[a_tuple[1]])  # 5 is a prompt num
             newdata = self.data_verifier(section_num, entered_data)
             if newdata is not None:
                 self.__teaholder[a_tuple[1]] = newdata
@@ -77,15 +77,28 @@ class TeasController:
             else:
                 self.__edited_sect = 0
 
+    # TODO implement logger to find out what is going on with the time validation
     def data_verifier(self, section_num, newdata):
         """ Check that the data entered for the section is valid. """
         validvalue = None
-        if self.__teaColumns[section_num-1][0] == "temperature":  # temperature
+
+        if self.__teaColumns[section_num-1][0] == "tea_name" or "tea_type" or "brand":
+            validvalue = newdata
+        elif self.__teaColumns[section_num-1][0] == "temperature":  # temperature
             if newdata.isdigit() and 35 <= int(newdata) <= 215:
                 validvalue = int(newdata)
         elif self.__teaColumns[section_num-1][0] == "package":
-            if newdata.lower() == "loose" or newdata.lower() == "bag" or newdata.lower() == "pyramid":
+            if newdata.lower() == "loose" or "bag" or "pyramid":
                 validvalue = newdata.capitalize()
+        elif self.__teaColumns[section_num-1][0] == "time":
+            print(newdata)
+            timeparts = newdata.split(':')
+            if len(timeparts) == 2:
+                if timeparts[0].isdigit() and timeparts[1].isdigit():
+                    mins = int(timeparts[0])
+                    secs = int(timeparts[1])
+                    if 0 <= mins <= 59 and 0 <= secs <= 59:
+                        validvalue = "{0:02d}:{1:02d}".format(mins, secs)
 
         return validvalue
 
