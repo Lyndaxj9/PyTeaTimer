@@ -84,16 +84,14 @@ class TeasController:
 
         if section_selected == "tea_name" or section_selected == "tea_type" or section_selected == "brand":
             validvalue = newdata
-        elif section_selected == "temperature":  # temperature
+        elif section_selected == "temperature":
             if newdata.isdigit() and 35 <= int(newdata) <= 215:
                 validvalue = int(newdata)
         elif section_selected == "package":
             ndatalower = newdata.lower()
-            if ndatalower == "loose" or ndatalower == "bag" or ndatalower == "pyramid":  # change how this comparision is done
+            if ndatalower == "loose" or ndatalower == "bag" or ndatalower == "pyramid":
                 validvalue = newdata.capitalize()
         elif section_selected == "time":
-            print(newdata)
-            print("in time verify")
             timeparts = newdata.split(':')
             if len(timeparts) == 2:
                 if timeparts[0].isdigit() and timeparts[1].isdigit() and \
@@ -102,6 +100,15 @@ class TeasController:
                     secs = int(timeparts[1])
                     if 0 <= mins <= 59 and 0 <= secs <= 59:
                         validvalue = "{0:02d}:{1:02d}".format(mins, secs)
+        elif section_selected == "price":
+            print(newdata)
+            priceparts = newdata.split('.')
+            if len(priceparts) == 2:
+                if priceparts[0].isdigit() and priceparts[1].isdigit() and len(priceparts[1]) <= 2:
+                    dollar = int(priceparts[0])
+                    cents = int(priceparts[1])
+                    if dollar >= 0 and 0 <= cents <= 99:
+                        validvalue = float('.'.join([str(dollar), str(cents)]))
 
         return validvalue
 
