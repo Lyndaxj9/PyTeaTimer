@@ -69,7 +69,7 @@ class TeasController:
         if 1 <= section_num <= 10:
             a_tuple = self.__teaColumns[section_num-1]
             print(self.__teaholder)
-            entered_data = self.tView.input_w_default(5, self.__teaholder[a_tuple[1]])  # 5 is a prompt num
+            entered_data = self.tView.input_w_default(5, self.__teaholder[a_tuple[1]])  # 5 is a text prompt num
             newdata = self.data_verifier(section_num, entered_data)
             if newdata is not None:
                 self.__teaholder[a_tuple[1]] = newdata
@@ -81,17 +81,19 @@ class TeasController:
     def data_verifier(self, section_num, newdata):
         """ Check that the data entered for the section is valid. """
         validvalue = None
+        section_selected = self.__teaColumns[section_num-1][0]
 
-        if self.__teaColumns[section_num-1][0] == "tea_name" or "tea_type" or "brand":
+        if section_selected == "tea_name" or section_selected == "tea_type" or section_selected == "brand":
             validvalue = newdata
         elif self.__teaColumns[section_num-1][0] == "temperature":  # temperature
             if newdata.isdigit() and 35 <= int(newdata) <= 215:
                 validvalue = int(newdata)
         elif self.__teaColumns[section_num-1][0] == "package":
-            if newdata.lower() == "loose" or "bag" or "pyramid":
+            if newdata.lower() == "loose" or "bag" or "pyramid":  # change how this comparision is done
                 validvalue = newdata.capitalize()
         elif self.__teaColumns[section_num-1][0] == "time":
             print(newdata)
+            print("in time verify")
             timeparts = newdata.split(':')
             if len(timeparts) == 2:
                 if timeparts[0].isdigit() and timeparts[1].isdigit():
