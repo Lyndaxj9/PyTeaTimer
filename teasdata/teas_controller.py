@@ -77,7 +77,6 @@ class TeasController:
             else:
                 self.__edited_sect = 0
 
-    # TODO implement logger to find out what is going on with the time validation
     def data_verifier(self, section_num, newdata):
         """ Check that the data entered for the section is valid. """
         validvalue = None
@@ -85,18 +84,20 @@ class TeasController:
 
         if section_selected == "tea_name" or section_selected == "tea_type" or section_selected == "brand":
             validvalue = newdata
-        elif self.__teaColumns[section_num-1][0] == "temperature":  # temperature
+        elif section_selected == "temperature":  # temperature
             if newdata.isdigit() and 35 <= int(newdata) <= 215:
                 validvalue = int(newdata)
-        elif self.__teaColumns[section_num-1][0] == "package":
-            if newdata.lower() == "loose" or "bag" or "pyramid":  # change how this comparision is done
+        elif section_selected == "package":
+            ndatalower = newdata.lower()
+            if ndatalower == "loose" or ndatalower == "bag" or ndatalower == "pyramid":  # change how this comparision is done
                 validvalue = newdata.capitalize()
-        elif self.__teaColumns[section_num-1][0] == "time":
+        elif section_selected == "time":
             print(newdata)
             print("in time verify")
             timeparts = newdata.split(':')
             if len(timeparts) == 2:
-                if timeparts[0].isdigit() and timeparts[1].isdigit():
+                if timeparts[0].isdigit() and timeparts[1].isdigit() and \
+                                len(timeparts[0]) <= 2 and len(timeparts[1]) <= 2:
                     mins = int(timeparts[0])
                     secs = int(timeparts[1])
                     if 0 <= mins <= 59 and 0 <= secs <= 59:

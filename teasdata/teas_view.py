@@ -77,21 +77,21 @@ class TeasView:
         finally:
             readline.set_startup_hook()
 
-    def notes_printer(self, tea_notes):
+    def notes_printer(self, tea_notes, line_len):
         """ Print within the format of the program when the text from tea_notes has newlines """
-        self.line_wrapper(tea_notes[0])
+        self.line_wrapper(tea_notes[0], line_len)
         if len(tea_notes) > 1:
             for i in range(1, len(tea_notes)):
                 print(self.__notesformat01.format(tea_notes[i]))
 
     # TODO come up with better formula to split long string
-    def line_wrapper(self, note_line):
+    def line_wrapper(self, note_line, line_len):
         """ Print onto multiple lines that fit within the width of the program the text from note_lines """
-        if len(note_line) > self.__notelinelen:
-            lines = ceil(len(note_line) / self.__notelinelen)
+        if len(note_line) > line_len:
+            lines = ceil(len(note_line) / line_len)
             for i in range(1, int(lines)):
                 print(self.__notesformat01.format(
-                    note_line[i*self.__notelinelen:i*self.__notelinelen+self.__notelinelen]))
+                    note_line[i*line_len:i*line_len+line_len]))
 
     def one_tea_display(self, in_tea, status):
         """ Print information about one tea that is passed in. """
@@ -110,7 +110,7 @@ class TeasView:
 
         notelines = in_tea[5].split('\n')
         print(self.__notesformat00.format(notelines[0][0:self.__notelinelen]))
-        self.notes_printer(notelines)
+        self.notes_printer(notelines, self.__notelinelen)
         print(self.__buyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
         if status != -1:
@@ -132,7 +132,7 @@ class TeasView:
 
         notelines = in_tea[5].split('\n')
         print(self.__ennotesformat00.format(notelines[0][0:self.__ennotelinelen]))
-        self.notes_printer(notelines)
+        self.notes_printer(notelines, self.__ennotelinelen)
         print(self.__enbuyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
         if status != -1:
