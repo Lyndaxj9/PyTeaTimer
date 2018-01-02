@@ -78,7 +78,11 @@ class TeasController:
         validvalue = None
         section_selected = self.__teaColumns[section_num-1][0]
 
-        if section_selected == "tea_name" or section_selected == "tea_type" or section_selected == "brand":
+        if newdata == "":
+            if section_selected == "brand" or section_selected == "package" or section_selected == "price" or \
+            section_selected == "notes" or section_selected == "buy_again" or section_selected == "on_hand":
+                validvalue = newdata
+        elif section_selected == "tea_name" or section_selected == "tea_type" or section_selected == "brand":
             validvalue = newdata
         elif section_selected == "temperature":
             if newdata.isdigit() and 35 <= int(newdata) <= 215:
@@ -96,7 +100,7 @@ class TeasController:
                     secs = int(timeparts[1])
                     if 0 <= mins <= 59 and 0 <= secs <= 59:
                         validvalue = "{0:02d}:{1:02d}".format(mins, secs)
-        elif section_selected == "price":  # maybe allow entering "#" for a flat dollar amount
+        elif section_selected == "price":
             priceparts = newdata.split('.')
             if len(priceparts) == 2:
                 if priceparts[0].isdigit() and priceparts[1].isdigit() and len(priceparts[1]) <= 2:
