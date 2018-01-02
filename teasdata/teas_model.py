@@ -37,9 +37,23 @@ class TeasModel:
     def set_one_tea(self, tea_columns, tea_info, tea_id):
         """ Update the columns of a single tea based on the information that was modified in the tuple list """
         print("will do updates to database later when implemented")
+        query = ''' UPDATE teas SET '''
+        items = []
         for col, idx in tea_columns:
             if tea_info[idx] != tea_id[idx]:
-                print(col, tea_info[idx])
+                if items == []:
+                    items.append(tea_info[idx])
+                    query = query + col + " = ?"
+                else:
+                    items.append(tea_info[idx])
+                    query = query + ", " + col + " = ?"
+
+        if items != []:
+            items.append(tea_id[0])
+            query = query + " WHERE id = ?"
+
+        print(query)
+        print(items)
 
 
 

@@ -73,7 +73,7 @@ if __name__ == '__main__':
     if conn is not None:
         print("Hurray! created the database connection.")
         query = ''' UPDATE teas SET notes = ?, price = ? WHERE id = ?'''
-        tasks = ("wow this tea pretty alright!", 4.00, 4)
+        tasks = ("wow this tea pretty alright!", 8.00, 4)
         update_row_in_table(conn, query, tasks)
     else:
         print("Error! cannot create the database connection.")
