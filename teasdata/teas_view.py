@@ -50,8 +50,8 @@ class TeasView:
         self.__error03 = "ERROR: Value entered not valid for field."
         self.__errors = [self.__error00, self.__error01, self.__error02, self.__error03]
 
-        self.__status01 = "Action Successful"
         self.__status00 = "Action Unsuccessful"
+        self.__status01 = "Action Successful"
         self.__statustext = [self.__status00, self.__status01]
 
     def general_display(self):

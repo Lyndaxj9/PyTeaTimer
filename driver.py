@@ -50,7 +50,7 @@ def main():
                                         tea_ctrl_view.data_editor(edit_response)
                                         tea_ctrl_view.edit_one_data()
                                     if edit_response.upper() == 'S':
-                                        print("save edits")
+                                        tea_ctrl_view.update_one_tea()
                                     if edit_response.upper() == 'C':
                                         print("Are you sure you want to discard changes made? 'Y' or 'N'")
                                         edit_response = input()

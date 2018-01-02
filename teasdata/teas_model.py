@@ -34,6 +34,11 @@ class TeasModel:
         else:
             print("No database connection exists.")
 
+    def set_one_tea(self, tea_info, tea_id):
+        """ Update the columns of a single tea based on the information that was modified in the tuple list """
+        print("will do updates to database later when implemented")
+
+
 if __name__ == '__main__':
     tm = TeasModel("tea.db")
     tm.get_teas()

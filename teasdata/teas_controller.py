@@ -68,7 +68,6 @@ class TeasController:
         section_num = int(section_num)
         if 1 <= section_num <= 10:
             a_tuple = self.__teaColumns[section_num-1]
-            print(self.__teaholder)
             entered_data = self.tView.input_w_default(5, self.__teaholder[a_tuple[1]])  # 5 is a text prompt num
             newdata = self.data_verifier(section_num, entered_data)
             if newdata is not None:
@@ -117,6 +116,9 @@ class TeasController:
                     validvalue = newdata.capitalize()
 
         return validvalue
+
+    def update_one_tea(self):
+        self.__tModel.set_one_tea(self.__teaholder, self.singleTea)
 
 
 if __name__ == '__main__':
