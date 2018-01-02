@@ -101,7 +101,6 @@ class TeasController:
                     if 0 <= mins <= 59 and 0 <= secs <= 59:
                         validvalue = "{0:02d}:{1:02d}".format(mins, secs)
         elif section_selected == "price":
-            print(newdata)
             priceparts = newdata.split('.')
             if len(priceparts) == 2:
                 if priceparts[0].isdigit() and priceparts[1].isdigit() and len(priceparts[1]) <= 2:
@@ -109,6 +108,13 @@ class TeasController:
                     cents = int(priceparts[1])
                     if dollar >= 0 and 0 <= cents <= 99:
                         validvalue = float('.'.join([str(dollar), str(cents)]))
+        elif section_selected == "notes":
+            validvalue = newdata
+        elif section_selected == "buy_again" or section_selected == "on_hand":
+            ndatalower = newdata.lower()
+            if ndatalower == "no" or ndatalower == "yes" or ndatalower == "maybe":
+                if not(ndatalower == "maybe" and section_selected == "on_hand"):
+                    validvalue = newdata.capitalize()
 
         return validvalue
 
