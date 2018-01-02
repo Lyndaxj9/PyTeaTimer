@@ -118,7 +118,7 @@ class TeasController:
         return validvalue
 
     def update_one_tea(self):
-        self.__tModel.set_one_tea(self.__teaColumns, self.__teaholder, self.singleTea[0])
+        return self.__tModel.set_one_tea(self.__teaColumns, self.__teaholder, self.singleTea[0])
 
 
 if __name__ == '__main__':

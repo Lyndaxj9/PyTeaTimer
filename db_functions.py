@@ -62,9 +62,10 @@ def update_row_in_table(in_conn, update_query, paramvars):
         c = in_conn.cursor()
         c.execute(update_query, paramvars)
         in_conn.commit()
-        print("update made!")
+        return True
     except sqlite3.Error as e:
         print(e)
+        return False
 
 if __name__ == '__main__':
     database = "teasdata/tea.db"

@@ -54,9 +54,10 @@ class TeasModel:
             query = query + " WHERE id = ?"
 
         if self.databaseconnected:
-            update_row_in_table(self.__DBCONN, query, tuple(items))
+            return update_row_in_table(self.__DBCONN, query, tuple(items))
         else:
             print("No database connection exists.")
+            return False
 
 
 

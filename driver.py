@@ -40,21 +40,21 @@ def main():
                                 tea_ctrl_view.get_one_tea(selected_tea, countdown.set_timer_min_secs(tmin, tsec))
                             elif view_response.upper() == 'A':  # Go back to viewing all teas
                                 tea_ctrl_view.get_all_teas()
-                            # TODO add funtionality for saving and canceling edit
                             elif view_response.upper() == 'E':
                                 tea_ctrl_view.edit_one_tea()
                                 edit_response = 'E'
+                                action_status = -1
                                 while edit_response.upper() != 'S' and edit_response.upper() != 'Y':
                                     edit_response = input()
                                     if edit_response.isdigit():
                                         tea_ctrl_view.data_editor(edit_response)
                                         tea_ctrl_view.edit_one_data()
                                     if edit_response.upper() == 'S':
-                                        tea_ctrl_view.update_one_tea()
+                                        action_status = tea_ctrl_view.update_one_tea()
                                     if edit_response.upper() == 'C':
                                         print("Are you sure you want to discard changes made? 'Y' or 'N'")
                                         edit_response = input()
-                                tea_ctrl_view.get_one_tea(selected_tea)
+                                tea_ctrl_view.get_one_tea(selected_tea, action_status)
 
                 elif view_response.upper() == 'B':
                     pass
