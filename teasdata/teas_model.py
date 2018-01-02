@@ -35,8 +35,9 @@ class TeasModel:
             print("No database connection exists.")
 
     def set_one_tea(self, tea_columns, tea_info, tea_id):
-        """ Update the columns of a single tea based on the information that was modified in the tuple list """
-        print("will do updates to database later when implemented")
+        """ Create query statement and update the columns of a single tea based on the
+        information that was modified in the tuple list
+        """
         query = ''' UPDATE teas SET '''
         items = []
         for col, idx in tea_columns:
@@ -52,8 +53,10 @@ class TeasModel:
             items.append(tea_id[0])
             query = query + " WHERE id = ?"
 
-        print(query)
-        print(items)
+        if self.databaseconnected:
+            update_row_in_table(self.__DBCONN, query, tuple(items))
+        else:
+            print("No database connection exists.")
 
 
 

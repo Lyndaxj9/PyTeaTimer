@@ -99,7 +99,7 @@ class TeasController:
                     secs = int(timeparts[1])
                     if 0 <= mins <= 59 and 0 <= secs <= 59:
                         validvalue = "{0:02d}:{1:02d}".format(mins, secs)
-        elif section_selected == "price":
+        elif section_selected == "price":  # maybe allow entering "#" for a flat dollar amount
             priceparts = newdata.split('.')
             if len(priceparts) == 2:
                 if priceparts[0].isdigit() and priceparts[1].isdigit() and len(priceparts[1]) <= 2:
