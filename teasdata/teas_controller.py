@@ -54,11 +54,8 @@ class TeasController:
 
         return timenumbers[0], timenumbers[1]
 
-    # TODO add functionality to edit tea information
     def edit_one_tea(self):
         self.tView.one_tea_edit_new_display(self.__teaholder)
-        # print(self.singleTea)
-        # self.tView.one_tea_display(self.singleTea, False)
 
     def edit_one_data(self):
         self.tView.one_tea_edit_new_display(self.__teaholder, self.__edited_sect)
@@ -107,6 +104,10 @@ class TeasController:
                     cents = int(priceparts[1])
                     if dollar >= 0 and 0 <= cents <= 99:
                         validvalue = float('.'.join([str(dollar), str(cents)]))
+            elif len(priceparts) == 1:
+                if priceparts[0].isdigit():
+                    if int(priceparts[0]) >= 0:
+                        validvalue = float(priceparts[0])
         elif section_selected == "notes":
             validvalue = newdata
         elif section_selected == "buy_again" or section_selected == "on_hand":
