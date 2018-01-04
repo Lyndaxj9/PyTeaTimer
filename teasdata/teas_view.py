@@ -84,6 +84,17 @@ class TeasView:
             for i in range(1, len(tea_notes)):
                 print(self.__notesformat01.format(tea_notes[i]))
 
+    def notes_printer01(self, tea_notes, line_len, print_format):
+        firstline = self.line_wrapper01(tea_notes[0], line_len, 0)
+        newstart = len(firstline)
+        print(print_format.format(firstline))
+        for i in range(0, len(tea_notes)):
+            while tea_notes[i][newstart:] != "":
+                nextline = self.line_wrapper01(tea_notes[i], line_len, newstart)
+                newstart = newstart + len(nextline)
+                print(self.__notesformat01.format(nextline))
+            newstart = 0
+
     # TODO come up with better formula to split long string
     def line_wrapper(self, note_line, line_len):
         """ Print onto multiple lines that fit within the width of the program the text from note_lines """
@@ -92,6 +103,23 @@ class TeasView:
             for i in range(1, int(lines)):
                 print(self.__notesformat01.format(
                     note_line[i*line_len:i*line_len+line_len]))
+
+    def line_wrapper01(self, note_line, line_len, startline):
+        endline = startline + line_len
+        shortline = ""
+        if len(note_line) > endline:
+            if note_line[endline] == " ":
+                shortline = note_line[startline:endline]
+            else:
+                i = 1
+                while startline != endline and note_line[endline - i] != " ":
+                    i = i + 1
+                if startline != endline:
+                    shortline = note_line[startline:endline - i + 1]
+        else:
+            shortline = note_line[startline:]
+
+        return shortline
 
     def one_tea_display(self, in_tea, status):
         """ Print information about one tea that is passed in. """
@@ -109,8 +137,11 @@ class TeasView:
         print(self.__seperator01)
 
         notelines = in_tea[5].split('\n')
+        self.notes_printer01(notelines, self.__notelinelen, self.__notesformat00)
+        """
         print(self.__notesformat00.format(notelines[0][0:self.__notelinelen]))
         self.notes_printer(notelines, self.__notelinelen)
+        """
         print(self.__buyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
         if status != -1:
@@ -131,8 +162,11 @@ class TeasView:
         print(self.__seperator01)
 
         notelines = in_tea[5].split('\n')
+        self.notes_printer01(notelines, self.__ennotelinelen, self.__ennotesformat00)
+        """
         print(self.__ennotesformat00.format(notelines[0][0:self.__ennotelinelen]))
         self.notes_printer(notelines, self.__ennotelinelen)
+        """
         print(self.__enbuyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
         if status != -1:
