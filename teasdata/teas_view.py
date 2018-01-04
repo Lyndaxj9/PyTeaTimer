@@ -77,34 +77,20 @@ class TeasView:
         finally:
             readline.set_startup_hook()
 
-    def notes_printer(self, tea_notes, line_len):
-        """ Print within the format of the program when the text from tea_notes has newlines """
-        self.line_wrapper(tea_notes[0], line_len)
-        if len(tea_notes) > 1:
-            for i in range(1, len(tea_notes)):
-                print(self.__notesformat01.format(tea_notes[i]))
-
     def notes_printer01(self, tea_notes, line_len, print_format):
+        """ Prints the lines within notes to fit within the length of the print formats. """
         firstline = self.line_wrapper01(tea_notes[0], line_len, 0)
         newstart = len(firstline)
         print(print_format.format(firstline))
         for i in range(0, len(tea_notes)):
             while tea_notes[i][newstart:] != "":
-                nextline = self.line_wrapper01(tea_notes[i], line_len, newstart)
+                nextline = self.line_wrapper01(tea_notes[i], 56, newstart)
                 newstart = newstart + len(nextline)
                 print(self.__notesformat01.format(nextline))
             newstart = 0
 
-    # TODO come up with better formula to split long string
-    def line_wrapper(self, note_line, line_len):
-        """ Print onto multiple lines that fit within the width of the program the text from note_lines """
-        if len(note_line) > line_len:
-            lines = ceil(len(note_line) / line_len)
-            for i in range(1, int(lines)):
-                print(self.__notesformat01.format(
-                    note_line[i*line_len:i*line_len+line_len]))
-
     def line_wrapper01(self, note_line, line_len, startline):
+        """ Cuts the line to a length that fits within the line length and doesn't cut in the middle of a word. """
         endline = startline + line_len
         shortline = ""
         if len(note_line) > endline:
@@ -138,10 +124,6 @@ class TeasView:
 
         notelines = in_tea[5].split('\n')
         self.notes_printer01(notelines, self.__notelinelen, self.__notesformat00)
-        """
-        print(self.__notesformat00.format(notelines[0][0:self.__notelinelen]))
-        self.notes_printer(notelines, self.__notelinelen)
-        """
         print(self.__buyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
         if status != -1:
@@ -163,10 +145,6 @@ class TeasView:
 
         notelines = in_tea[5].split('\n')
         self.notes_printer01(notelines, self.__ennotelinelen, self.__ennotesformat00)
-        """
-        print(self.__ennotesformat00.format(notelines[0][0:self.__ennotelinelen]))
-        self.notes_printer(notelines, self.__ennotelinelen)
-        """
         print(self.__enbuyhandformat.format(in_tea[8], in_tea[9]))
         print(self.__seperator00)
         if status != -1:
