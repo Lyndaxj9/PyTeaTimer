@@ -1,5 +1,4 @@
 #!/usr/local/bin/python3
-from math import ceil
 import readline
 
 
@@ -23,6 +22,7 @@ class TeasView:
         self.__notesformat00 = "|Notes: {0:49s}|"
         self.__notesformat01 = "|{0:56s}|"
         self.__buyhandformat = "|Buy Again: {0:24s}|On Hand: {1:11s}|"
+        self.__moodbuyhandformat = "|Mood: {2:11s}|Buy Again: {0:^6s}|On Hand: {1:11s}|"
 
         self.__ennamebrandformat = "|(1){0:<18.18s} (2)({2:^8s})|(3)Brand: {1: <10.10s}|"
         self.__entemppkgformat = "|(4){0:<32s}|(5)Packaging: {1:6.6s}|"
@@ -32,6 +32,7 @@ class TeasView:
         self.__ennotesformat00 = "|(8)Notes: {0:46s}|"
         self.__ennotesformat01 = "|{0:56s}|"
         self.__enbuyhandformat = "|(9)Buy Again: {0:21s}|(10)On Hand: {1:7s}|"
+        self.__enmoodbuyhandformat = "|(#)Mood: {2:6s}|(9)Buy Again: {0:5s}|(10)On Hand: {1:7s}|"
 
         self.__prompt00 = "'S' to (S)elect a tea | 'B' to go (B)ack"
         self.__prompt01 = "'A' to view (A)ll teas | 'T' to set (T)imer for this tea" \
@@ -124,7 +125,8 @@ class TeasView:
 
         notelines = in_tea[5].split('\n')
         self.notes_printer01(notelines, self.__notelinelen, self.__notesformat00)
-        print(self.__buyhandformat.format(in_tea[8], in_tea[9]))
+        # print(self.__buyhandformat.format(in_tea[8], in_tea[9]))
+        print(self.__moodbuyhandformat.format(in_tea[8], in_tea[9], in_tea[11]))
         print(self.__seperator00)
         if status != -1:
             print(self.__statustext[status])
@@ -145,7 +147,8 @@ class TeasView:
 
         notelines = in_tea[5].split('\n')
         self.notes_printer01(notelines, self.__ennotelinelen, self.__ennotesformat00)
-        print(self.__enbuyhandformat.format(in_tea[8], in_tea[9]))
+        # print(self.__enbuyhandformat.format(in_tea[8], in_tea[9]))
+        print(self.__enmoodbuyhandformat.format(in_tea[8], in_tea[9], "any"))
         print(self.__seperator00)
         if status != -1:
             print(self.__statustext[status])
