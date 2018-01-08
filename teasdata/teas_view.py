@@ -148,7 +148,7 @@ class TeasView:
         notelines = in_tea[5].split('\n')
         self.notes_printer01(notelines, self.__ennotelinelen, self.__ennotesformat00)
         # print(self.__enbuyhandformat.format(in_tea[8], in_tea[9]))
-        print(self.__enmoodbuyhandformat.format(in_tea[8], in_tea[9], "any"))
+        print(self.__enmoodbuyhandformat.format(in_tea[8], in_tea[9], in_tea[11]))
         print(self.__seperator00)
         if status != -1:
             print(self.__statustext[status])

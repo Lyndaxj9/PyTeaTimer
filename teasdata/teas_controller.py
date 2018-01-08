@@ -11,7 +11,7 @@ class TeasController:
         self.singleTea = ()
         self.__teaholder = []
         self.__teaColumns = (("tea_name", 1), ("tea_type", 2), ("brand", 7), ("temperature", 3), ("package", 6),
-                             ("time", 4), ("price", 10), ("notes", 5), ("buy_again", 8), ("on_hand", 9))
+                             ("time", 4), ("price", 10), ("notes", 5), ("mood", 11), ("buy_again", 8), ("on_hand", 9))
         self.manyTea = self.__tModel.get_teas()
         self.__edited_sect = -1
 
@@ -80,9 +80,11 @@ class TeasController:
 
         if newdata == "":
             if section_selected == "brand" or section_selected == "package" or section_selected == "price" or \
-            section_selected == "notes" or section_selected == "buy_again" or section_selected == "on_hand":
+            section_selected == "notes" or section_selected == "mood" or section_selected == "buy_again" or \
+            section_selected == "on_hand":
                 validvalue = newdata
-        elif section_selected == "tea_name" or section_selected == "tea_type" or section_selected == "brand":
+        elif section_selected == "tea_name" or section_selected == "tea_type" or section_selected == "brand" or \
+                section_selected == "mood":
             validvalue = newdata
         elif section_selected == "temperature":
             if newdata.isdigit() and 35 <= int(newdata) <= 215:
