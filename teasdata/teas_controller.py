@@ -11,7 +11,7 @@ class TeasController:
         self.singleTea = ()
         self.__teaholder = []
         self.__teaColumns = (("tea_name", 1), ("tea_type", 2), ("brand", 7), ("temperature", 3), ("package", 6),
-                             ("time", 4), ("price", 10), ("notes", 5), ("mood", 11), ("buy_again", 8), ("on_hand", 9))
+                             ("time", 4), ("price", 10), ("notes", 5), ("mood", 11), ("on_hand", 9), ("buy_again", 8))
         self.manyTea = self.__tModel.get_teas()
         self.__edited_sect = -1
 
@@ -63,7 +63,7 @@ class TeasController:
     def data_editor(self, section_num):
         """ Edit the data based on the section user chooses to modify. """
         section_num = int(section_num)
-        if 1 <= section_num <= 10:
+        if 1 <= section_num <= 11:
             a_tuple = self.__teaColumns[section_num-1]
             entered_data = self.tView.input_w_default(5, self.__teaholder[a_tuple[1]])  # 5 is a text prompt num
             newdata = self.data_verifier(section_num, entered_data)
