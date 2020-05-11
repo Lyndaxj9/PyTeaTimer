@@ -3,7 +3,7 @@
 from ctimer.countdown_timer import CountdownTimer
 from teasdata.teas_controller import TeasController
 
-
+#Author: Omowumi Ademola
 def main():
     countdown = CountdownTimer()
     tea_ctrl_view = TeasController()
